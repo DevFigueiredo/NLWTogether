@@ -11,7 +11,7 @@ class CreateUserService {
     this.usersRepository = getCustomRepository(UsersRepositories);
   }
 
-  async execute({ name, email, admin }: IUserRequest) {
+  async execute({ name, email, admin, password }: IUserRequest) {
     const userAlreadyExists = await this.usersRepository.findOne({ email });
     if (!email) {
       throw new ErrorRequest("Email Incorret");
@@ -25,6 +25,7 @@ class CreateUserService {
       name,
       email,
       admin,
+      password,
     });
 
     await this.usersRepository.save(user);
