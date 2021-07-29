@@ -1,4 +1,5 @@
-import { User } from "src/entities/User";
+import { ErrorRequest } from "../classes/ErrorRequest";
+import { User } from "../entities/User";
 import { getCustomRepository, Repository } from "typeorm";
 import { IUserRequest } from "../interfaces/IUserRequest";
 import { UsersRepositories } from "../repositories/UsersRepositories";
@@ -13,11 +14,11 @@ class CreateUserService {
   async execute({ name, email, admin }: IUserRequest) {
     const userAlreadyExists = await this.usersRepository.findOne({ email });
     if (!email) {
-      throw new Error("Email Incorret");
+      throw new ErrorRequest("Email Incorret");
     }
 
     if (userAlreadyExists) {
-      throw new Error("User Already Exists");
+      throw new ErrorRequest("User Already Exists");
     }
 
     const user = this.usersRepository.create({
