@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { IAuthenticateRequest } from "src/interfaces/IAuthenticateRequest";
+import { IAuthenticateRequest } from "../interfaces/IAuthenticateRequest";
 import { AuthenticateUserService } from "../services/AuthenticateUserService";
 
 class AuthenticateUserController {

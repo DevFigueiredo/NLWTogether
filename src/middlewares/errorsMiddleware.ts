@@ -10,6 +10,7 @@ export function errorsMiddleware(
   if (error instanceof ErrorRequest) {
     return response.status(error.statusCode).json({ error: error.message });
   }
+  console.log(error);
   return response.status(500).json({
     status: "error",
     error: "Internal Server Error",
