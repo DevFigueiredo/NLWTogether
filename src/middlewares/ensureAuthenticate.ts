@@ -11,15 +11,16 @@ export function ensureAuthenticated(
   response: Response,
   next: NextFunction
 ) {
-  const AuthToken = request.headers.authorization;
-  const [bearer, token] = AuthToken.split(" ");
-
-  if (bearer != "Bearer") return response.status(401).end();
-
-  if (!token) {
-    return response.status(401).end();
-  }
   try {
+    const AuthToken = request.headers.authorization;
+    const [bearer, token] = AuthToken.split(" ");
+
+    if (bearer != "Bearer") return response.status(401).end();
+
+    if (!token) {
+      return response.status(401).end();
+    }
+
     const { sub } = verify(token, process.env.SECRET_KEY) as VerifyJsonWebToken;
     request.user_id = sub;
     return next();

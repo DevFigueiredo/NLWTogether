@@ -34,8 +34,7 @@ class CreateComplimentService {
     if (!UserReceiverExists) {
       throw new ErrorRequest("User Receiver not found");
     }
-
-    const TagExists = await this.usersRepository.findOne(tag_id);
+    const TagExists = await this.tagsRepository.findOne(tag_id);
     if (!TagExists) {
       throw new ErrorRequest("Tag not found");
     }
