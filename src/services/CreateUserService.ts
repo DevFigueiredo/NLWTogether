@@ -3,7 +3,7 @@ import { User } from "../entities/User";
 import { getCustomRepository, Repository } from "typeorm";
 import { IUserRequest } from "../interfaces/IUserRequest";
 import { UsersRepositories } from "../repositories/UsersRepositories";
-
+import { hash } from "bcryptjs";
 class CreateUserService {
   private usersRepository: Repository<User>;
 
@@ -21,15 +21,17 @@ class CreateUserService {
       throw new ErrorRequest("User Already Exists");
     }
 
+    const passwordHash = await hash(password, 8);
+
     const user = this.usersRepository.create({
       name,
       email,
       admin,
-      password,
+      password: passwordHash,
     });
 
     await this.usersRepository.save(user);
-
+    delete user.password;
     return user;
   }
 }
