@@ -5,6 +5,8 @@ import { ErrorRequest } from "../classes/ErrorRequest";
 import { IAuthenticateRequest } from "src/interfaces/IAuthenticateRequest";
 import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
+import * as dotenv from "dotenv";
+dotenv.config();
 class AuthenticateUserService {
   private usersRepository: Repository<User>;
 
@@ -14,7 +16,6 @@ class AuthenticateUserService {
 
   async execute({ email, password }: IAuthenticateRequest) {
     const userExists = await this.usersRepository.findOne({ email });
-
     if (!userExists) {
       throw new ErrorRequest("Email/Password incorret!");
     }
@@ -28,7 +29,7 @@ class AuthenticateUserService {
       {
         email: userExists.email,
       },
-      "9dc0f698e5e8b5300988dc743c765673",
+      process.env.SECRET_KEY,
       {
         subject: userExists.id,
         expiresIn: "1d",
