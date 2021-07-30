@@ -21,7 +21,7 @@ const listComplimentsByUserSendedController =
   new ListComplimentsByUserSendedController();
 const listTagsController = new ListTagsController();
 routes.post("/auth", authenticateUserController.handle);
-routes.post("/users", ensureAdmin, createUserController.handle);
+routes.post("/users", createUserController.handle);
 routes.get(
   "/users/compliment/received",
   ensureAuthenticated,

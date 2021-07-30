@@ -2,7 +2,7 @@ import { Tag } from "../entities/Tag";
 import { ErrorRequest } from "../classes/ErrorRequest";
 import { getCustomRepository, Repository } from "typeorm";
 import { TagRepositories } from "../repositories/TagRepositories";
-
+import { classToPlain } from "class-transformer";
 class ListTagsService {
   private tagsRepository: Repository<Tag>;
 
@@ -12,7 +12,8 @@ class ListTagsService {
 
   async execute() {
     const TagsExists = await this.tagsRepository.find();
-    return TagsExists;
+
+    return classToPlain(TagsExists);
   }
 }
 

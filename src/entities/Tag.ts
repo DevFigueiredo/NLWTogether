@@ -1,3 +1,4 @@
+import { Expose } from "class-transformer";
 import {
   Entity,
   Column,
@@ -17,7 +18,10 @@ export class Tag {
   created_at: Date;
   @UpdateDateColumn()
   updated_at: Date;
-
+  @Expose({ name: "custom_name" })
+  nameCustome(): string {
+    return `#${this.name}`;
+  }
   constructor() {
     if (!this.id) this.id = uuid();
   }
