@@ -5,7 +5,7 @@ import { CreateTagController } from "./controllers/CreateTagController";
 import { CreateUserController } from "./controllers/CreateUserController";
 import { ListComplimentsByUserReceivedController } from "./controllers/ListComplimentsByUserReceivedController";
 import { ListComplimentsByUserSendedController } from "./controllers/ListComplimentsByUserSendedController";
-import { ListTagsController } from "./controllers/ListTagsControlle.r";
+import { ListTagsController } from "./controllers/ListTagsController";
 import { ensureAdmin } from "./middlewares/ensureAdmin";
 import { ensureAuthenticated } from "./middlewares/ensureAuthenticate";
 
